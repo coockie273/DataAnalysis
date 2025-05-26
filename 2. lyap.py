@@ -6,13 +6,9 @@ df = pd.read_csv("datasets/all_data.csv")
 pid_to_filter = 'BK7610'
 df = df[df['pid'] == pid_to_filter]
 
-df = df.iloc[0:10000]
+df = df.iloc[::120]
 
-series = df['TAC_Reading'].dropna().astype(float).values
-print("Длина ряда:", len(series))
+series = df['TAC_Reading']
 
-if len(series) < 100:
-    raise ValueError("Слишком мало данных для анализа!")
-
-lyap_e = nolds.lyap_r(series, emb_dim=5, matrix_dim=3)
-print("Ляпуновская экспонента (Вольф):", lyap_e)
+lyap_r = nolds.lyap_r(series, min_tsep=20)
+print("Ляпуновская экспонента (Вольф):", lyap_r)

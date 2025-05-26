@@ -8,7 +8,6 @@ def IQR(df, field, window_size):
     rolling_iqr = df[field].rolling(window=window_size).apply(
         lambda x: np.percentile(x, 75) - np.percentile(x, 25))
 
-    # Определение выбросов
     outliers = df[abs(df[field] - rolling_median) > 1.5 * rolling_iqr]
 
     print(f"Выбросы для поля {field}:")

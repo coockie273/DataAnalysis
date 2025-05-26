@@ -7,10 +7,12 @@ df = pd.read_csv("datasets/all_data.csv")
 
 pid_to_filter = 'BK7610'
 
-df = df[df['pid'] == pid_to_filter]
+df = pd.read_csv(f"datasets/clean_tac/{pid_to_filter}_clean_TAC.csv")
 
-# Рассчитываем автокорреляцию для временного ряда (по колонке 'value')
-lag_acf = acf(df['TAC_Reading'], nlags=1000000)
+#df = df[df['pid'] == pid_to_filter]
+#df = df.iloc[::120]
+
+lag_acf = acf(df['TAC_Reading'], nlags=100)
 
 # Строим график автокорреляции
 plt.figure(figsize=(10, 6))
